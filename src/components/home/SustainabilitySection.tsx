@@ -128,7 +128,11 @@ export const SustainabilitySection: React.FC<SustainabilitySectionProps> = ({ cl
                       <span className="text-sm font-bold text-green-600 dark:text-green-400">{metric.value}%</span>
                     </EditableContent>
                   </div>
-                  <Progress value={metric.value} className="h-2 bg-gray-200 dark:bg-gray-700" indicatorClassName="bg-green-500 dark:bg-green-600" />
+                  <Progress 
+                    value={metric.value} 
+                    className="h-2 bg-gray-200 dark:bg-gray-700" 
+                    indicatorClassName="bg-green-500 dark:bg-green-600" 
+                  />
                 </div>
                 
                 <EditableContent
