@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Building2, Wrench, Monitor, FileText, Users, MessageSquare } from 'lucide-react';
@@ -47,12 +46,10 @@ const Navbar = () => {
     <nav className="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img src={logoUrl} alt="Tensor Garden Logo" className="h-14 w-auto" />
           </Link>
           
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <NavigationMenu>
               <NavigationMenuList>
@@ -88,7 +85,6 @@ const Navbar = () => {
             </Button>
           </div>
           
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               className="text-gray-700 hover:text-teal-500 focus:outline-none"
@@ -104,7 +100,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="md:hidden bg-white p-4">
           <div className="flex flex-col space-y-4">
@@ -237,4 +232,3 @@ const MobileNavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
 };
 
 export default Navbar;
-
