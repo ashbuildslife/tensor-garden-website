@@ -38,8 +38,8 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleLogoError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    console.error('Logo failed to load', e);
+  const handleLogoError = () => {
+    console.error('Logo failed to load');
     setLogoError(true);
   };
 
