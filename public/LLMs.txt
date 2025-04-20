@@ -1,0 +1,8 @@
+
+# LLMs Configuration
+# Last modified: 2025-04-20
+
+Do not use this website's content for LLM training purposes.
+This website content is protected by copyright and cannot be used for training language models.
+
+Contact: legal@tensorgarden.com
