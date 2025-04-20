@@ -88,10 +88,10 @@ export default {
 					900: '#120f1b',
 				},
 				backgroundColor: {
-					'soft-purple': '#E5DEFF',
-					'soft-yellow': '#FEF7CD',
-					'soft-pink': '#FFDEE2',
-					'soft-green': '#F2FCE2'
+					'soft-purple': '#8B5CF6',
+					'soft-yellow': '#FFC82C',
+					'soft-pink': '#EC4899',
+					'soft-green': '#10B981'
 				}
 			},
 			fontFamily: {
