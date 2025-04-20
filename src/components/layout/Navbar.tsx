@@ -32,8 +32,8 @@ const industries = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // Direct path to the uploaded logo
-  const logoUrl = '/lovable-uploads/f26ca5f2-f17f-4609-9f9f-ce5d50d729ff.png';
+  // Updated path to the correct uploaded logo
+  const logoUrl = '/lovable-uploads/479b6a1e-b257-4d82-bc23-752f40dbd910.png';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
