@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { MobileNavLinks } from './MobileNavLinks';
 import { DesktopNavLinks } from './DesktopNavLinks';
 
-const logoUrl = '/lovable-uploads/e2e49140-6a09-416d-b76e-b679396bb899.png';
+const logoUrl = '/lovable-uploads/be881746-c243-4981-bf8c-d533235c978f.png';
 
 const industries = [
   {
@@ -32,9 +32,15 @@ const industries = [
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogoError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    console.error('Logo failed to load', e);
+    setLogoError(true);
   };
 
   return (
@@ -42,15 +48,16 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-2">
-            <img 
-              src={logoUrl} 
-              alt="Tensor Garden Logo" 
-              className="h-14 w-auto" 
-              onError={(e) => {
-                console.error('Logo failed to load', e);
-                e.currentTarget.style.display = 'none';
-              }}
-            />
+            {!logoError ? (
+              <img 
+                src={logoUrl} 
+                alt="Tensor Garden Logo" 
+                className="h-14 w-auto" 
+                onError={handleLogoError}
+              />
+            ) : (
+              <div className="text-xl font-bold text-gray-700">Tensor Garden</div>
+            )}
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
