@@ -48,22 +48,9 @@ export const AdminPanel: React.FC = () => {
     }
   };
 
-  // Don't show anything if not authenticated and not in edit mode
-  if (!isAuthenticated) {
-    return null;
-  }
-
+  // If not in edit mode, return null to completely remove the button
   if (!isEditMode) {
-    return (
-      <div className="fixed bottom-4 right-4 z-50">
-        <Button
-          className="bg-gray-800 hover:bg-gray-700 text-white"
-          onClick={handleAdminAccess}
-        >
-          Enter Admin Mode
-        </Button>
-      </div>
-    );
+    return null;
   }
 
   return (
