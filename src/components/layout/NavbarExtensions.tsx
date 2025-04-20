@@ -4,7 +4,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const NavbarExtensions: React.FC = () => {
   return (
-    <div className="ml-4">
+    <div className="flex items-center space-x-2">
       <ThemeToggle />
     </div>
   );

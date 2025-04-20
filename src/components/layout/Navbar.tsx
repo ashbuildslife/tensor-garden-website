@@ -33,7 +33,11 @@ const Navbar = () => {
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <NavbarExtensions />
           </div>
-          <div className="-mr-2 flex items-center sm:hidden">
+          <div className="flex items-center sm:hidden">
+            {/* Theme toggle for mobile, outside of menu */}
+            <div className="mr-4">
+              <NavbarExtensions />
+            </div>
             <Button 
               variant="ghost" 
               onClick={toggleMenu}
@@ -54,9 +58,6 @@ const Navbar = () => {
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1 px-4">
             <MobileNavLinks closeMenu={closeMenu} />
-            <div className="pt-4">
-              <NavbarExtensions />
-            </div>
           </div>
         </div>
       )}
