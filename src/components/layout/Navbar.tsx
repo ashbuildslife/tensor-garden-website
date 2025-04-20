@@ -145,6 +145,34 @@ const NavLinks = () => {
         <Monitor className="w-4 h-4" />
         Products
       </Link>
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger className="text-gray-700 hover:text-teal-500 font-medium">
+              <span className="flex items-center gap-2">
+                <Building2 className="w-4 h-4" />
+                Industries
+              </span>
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <div className="grid gap-3 p-6 w-[400px] lg:w-[500px] lg:grid-cols-2">
+                {industries.map((industry) => (
+                  <Link
+                    key={industry.href}
+                    to={industry.href}
+                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  >
+                    <div className="text-sm font-medium leading-none">{industry.title}</div>
+                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                      {industry.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
       <Link to="/case-studies" className="text-gray-700 hover:text-teal-500 font-medium flex items-center gap-2">
         <FileText className="w-4 h-4" />
         Case Studies
@@ -209,3 +237,4 @@ const MobileNavLinks = ({ closeMenu }: { closeMenu: () => void }) => {
 };
 
 export default Navbar;
+
