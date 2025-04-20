@@ -3,7 +3,7 @@ import { Json } from "./types";
 
 export interface CmsContent {
   id: string;
-  type: 'page' | 'blog_post' | 'case_study' | 'service' | 'product' | 'testimonial';
+  type: 'page' | 'blog_post' | 'case_study' | 'service' | 'product' | 'testimonial' | 'feature_config';
   title: string;
   slug: string;
   meta_description: string | null;

@@ -1,3 +1,8 @@
 
+# By default, allow all crawlers
 User-agent: *
-Disallow: /
+Allow: /
+
+# Check CMS settings for is_indexable flag
+# If CMS sets a content item to not be indexable, 
+# it can dynamically generate disallow rules here
