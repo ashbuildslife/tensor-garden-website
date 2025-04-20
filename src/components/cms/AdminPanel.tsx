@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useCMS } from '@/contexts/CMSContext';
@@ -46,28 +45,12 @@ export const AdminPanel: React.FC = () => {
         description: "You need to sign in to access the admin panel.",
         variant: "destructive"
       });
-      // Here you would redirect to a login page if it existed
-      // navigate('/login');
     }
   };
 
   // Don't show anything if not authenticated and not in edit mode
-  if (!isAuthenticated && !isEditMode) {
+  if (!isAuthenticated) {
     return null;
-  }
-
-  // In case user was in edit mode but got logged out
-  if (!isAuthenticated && isEditMode) {
-    return (
-      <div className="fixed bottom-4 right-4 z-50">
-        <Button
-          className="bg-red-600 hover:bg-red-500 text-white"
-          onClick={toggleEditMode}
-        >
-          Exit Edit Mode
-        </Button>
-      </div>
-    );
   }
 
   if (!isEditMode) {
