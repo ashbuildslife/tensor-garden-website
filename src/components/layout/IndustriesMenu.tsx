@@ -41,7 +41,7 @@ export const IndustriesMenu = () => {
             <Building2 className="w-4 h-4" />
             Industries
           </NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className="z-50">
             <div className="grid gap-3 p-6 w-[400px] lg:w-[500px] lg:grid-cols-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
               {industries.map((industry) => (
                 <Link
