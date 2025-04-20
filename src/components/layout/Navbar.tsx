@@ -1,17 +1,66 @@
 
-// This is a read-only file, so we'll need to use a different approach.
-// Let's create a NavbarExtensions component that can be imported into the Navbar
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { DesktopNavLinks } from './DesktopNavLinks';
+import { MobileNavLinks } from './MobileNavLinks';
+import NavbarExtensions from './NavbarExtensions';
 
-<lov-write file_path="src/components/layout/NavbarExtensions.tsx">
-import React from 'react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-const NavbarExtensions: React.FC = () => {
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <div className="ml-4">
-      <ThemeToggle />
-    </div>
+    <nav className="bg-white dark:bg-gray-900 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <Link to="/" className="flex-shrink-0 flex items-center">
+              <span className="text-xl font-bold text-teal-600 dark:text-teal-400">Tensor Garden</span>
+            </Link>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
+              <DesktopNavLinks />
+            </div>
+          </div>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <NavbarExtensions />
+          </div>
+          <div className="-mr-2 flex items-center sm:hidden">
+            <Button 
+              variant="ghost" 
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="sm:hidden">
+          <div className="pt-2 pb-3 space-y-1 px-4">
+            <MobileNavLinks closeMenu={closeMenu} />
+            <div className="pt-4">
+              <NavbarExtensions />
+            </div>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 
-export default NavbarExtensions;
+export default Navbar;
