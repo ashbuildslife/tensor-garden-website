@@ -37,20 +37,20 @@ export const IndustriesMenu = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-gray-700 hover:text-teal-500 font-medium flex items-center gap-2">
+          <NavigationMenuTrigger className="text-gray-100 dark:text-white hover:text-teal-300 dark:hover:text-teal-400 font-medium flex items-center gap-2 bg-transparent hover:bg-transparent">
             <Building2 className="w-4 h-4" />
             Industries
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="grid gap-3 p-6 w-[400px] lg:w-[500px] lg:grid-cols-2">
+            <div className="grid gap-3 p-6 w-[400px] lg:w-[500px] lg:grid-cols-2 bg-gray-900 dark:bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
               {industries.map((industry) => (
                 <Link
                   key={industry.href}
                   to={industry.href}
-                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-800 dark:hover:bg-gray-700 text-gray-100 dark:text-white"
                 >
-                  <div className="text-sm font-medium leading-none">{industry.title}</div>
-                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                  <div className="text-sm font-medium leading-none text-teal-300 dark:text-teal-400">{industry.title}</div>
+                  <p className="line-clamp-2 text-sm leading-snug text-gray-400 dark:text-gray-300">
                     {industry.description}
                   </p>
                 </Link>
