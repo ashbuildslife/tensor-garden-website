@@ -11,16 +11,16 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <section className="bg-soft-purple w-full">
+      <section className="bg-section-dark w-full">
         <ProblemSection />
       </section>
-      <section className="bg-soft-yellow w-full">
+      <section className="bg-section-light w-full">
         <SolutionsOverview />
       </section>
-      <section className="bg-soft-pink w-full">
+      <section className="bg-section-dark w-full">
         <FeaturedCaseStudy />
       </section>
-      <section className="bg-soft-green w-full">
+      <section className="bg-section-light w-full">
         <Testimonials />
       </section>
       <ContactCta />
@@ -29,4 +29,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

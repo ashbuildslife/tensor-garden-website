@@ -62,7 +62,6 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Tensor Garden Colors
 				teal: {
 					50: '#e6f7f7',
 					100: '#ccefef',
@@ -90,7 +89,9 @@ export default {
 				'soft-purple': '#EEE9FF',
 				'soft-yellow': '#F9F5E9',
 				'soft-pink': '#F9F0F2',
-				'soft-green': '#EFF6F6'
+				'soft-green': '#EFF6F6',
+				'section-light': '#F8F9FC',
+				'section-dark': '#F1F1F6'
 			},
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
