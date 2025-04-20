@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useCMS } from '@/contexts/CMSContext';
@@ -14,6 +15,8 @@ export const AdminPanel: React.FC = () => {
 
   // Check authentication status on component mount
   React.useEffect(() => {
+    if (!isEditMode) return; // Skip all auth checking if not in edit mode
+    
     const checkAuth = async () => {
       const { data } = await supabase.auth.getSession();
       setIsAuthenticated(!!data.session);
@@ -36,19 +39,7 @@ export const AdminPanel: React.FC = () => {
     };
   }, [isEditMode, toggleEditMode]);
 
-  const handleAdminAccess = () => {
-    if (isAuthenticated) {
-      toggleEditMode();
-    } else {
-      toast({
-        title: "Authentication Required",
-        description: "You need to sign in to access the admin panel.",
-        variant: "destructive"
-      });
-    }
-  };
-
-  // If not in edit mode, return null to completely remove the button
+  // If not in edit mode, return null to completely remove the component from the DOM
   if (!isEditMode) {
     return null;
   }
