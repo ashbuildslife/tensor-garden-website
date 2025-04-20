@@ -1,13 +1,20 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { MobileNavLinks } from './MobileNavLinks';
 import { DesktopNavLinks } from './DesktopNavLinks';
 
-// Update the logo URL to point to the newly uploaded image
-const logoUrl = '/lovable-uploads/30382601-3781-4f5e-a103-d085f7a855ae.png';
+// For debugging purposes - try an embedded SVG logo as fallback
+const SvgLogo = () => (
+  <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="40" height="40" rx="8" fill="#14b8a6" />
+    <path d="M8 20h24" stroke="white" strokeWidth="4" strokeLinecap="round" />
+    <path d="M20 8v24" stroke="white" strokeWidth="4" strokeLinecap="round" />
+    <text x="50" y="25" fontFamily="Arial" fontSize="18" fontWeight="bold" fill="#14b8a6">Tensor Garden</text>
+  </svg>
+);
 
 const industries = [
   {
@@ -34,9 +41,31 @@ const industries = [
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
+  const [logoError, setLogoError] = useState(false);
+  
+  // For debugging - log available images in public folder
+  useEffect(() => {
+    console.log("Current logo path being used:", logoUrl);
+    console.log("Logo loaded state:", logoLoaded);
+    console.log("Logo error state:", logoError);
+  }, [logoLoaded, logoError]);
+
+  // Instead of hardcoding a path that might not exist, use the SVG logo
+  const logoUrl = '/lovable-uploads/30382601-3781-4f5e-a103-d085f7a855ae.png'; 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogoError = () => {
+    console.error("Logo failed to load from path:", logoUrl);
+    setLogoError(true);
+  };
+
+  const handleLogoLoad = () => {
+    console.log("Logo loaded successfully from:", logoUrl);
+    setLogoLoaded(true);
   };
 
   return (
@@ -44,12 +73,18 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-2">
-            <img 
-              src={logoUrl} 
-              alt="Tensor Garden Logo" 
-              className="h-12 w-auto object-contain" 
-              style={{ maxWidth: '180px' }}
-            />
+            {logoError ? (
+              <SvgLogo />
+            ) : (
+              <img 
+                src={logoUrl} 
+                alt="Tensor Garden Logo" 
+                className="h-12 w-auto object-contain" 
+                style={{ maxWidth: '180px' }}
+                onError={handleLogoError}
+                onLoad={handleLogoLoad}
+              />
+            )}
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
