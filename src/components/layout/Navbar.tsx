@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { MobileNavLinks } from './MobileNavLinks';
 import { DesktopNavLinks } from './DesktopNavLinks';
 
-const logoUrl = '/lovable-uploads/d559e619-e50b-4a6b-b188-b5a6b78a09ca.png';
+// Update the logo URL to point to the newly uploaded image
+const logoUrl = '/lovable-uploads/30382601-3781-4f5e-a103-d085f7a855ae.png';
 
 const industries = [
   {
@@ -33,21 +34,9 @@ const industries = [
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logoError, setLogoError] = useState(false);
-  const [logoLoaded, setLogoLoaded] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLogoError = () => {
-    console.error('Logo failed to load');
-    setLogoError(true);
-  };
-
-  const handleLogoLoad = () => {
-    console.log('Logo loaded successfully');
-    setLogoLoaded(true);
   };
 
   return (
@@ -58,10 +47,8 @@ const Navbar = () => {
             <img 
               src={logoUrl} 
               alt="Tensor Garden Logo" 
-              className="h-14 w-auto object-contain" 
-              onError={handleLogoError}
-              onLoad={handleLogoLoad}
-              style={{ maxWidth: '200px' }}
+              className="h-12 w-auto object-contain" 
+              style={{ maxWidth: '180px' }}
             />
           </Link>
           
