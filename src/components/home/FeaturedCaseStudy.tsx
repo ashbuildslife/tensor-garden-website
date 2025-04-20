@@ -12,14 +12,14 @@ const FeaturedCaseStudy = () => {
   const featuredCaseStudy = homePage?.content.featuredCaseStudy;
 
   return (
-    <section className="bg-white py-20">
+    <section className="bg-soft-pink py-20">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Client Success"
           subtitle="See how our AI solutions have transformed operations for insurance businesses."
         />
         
-        <div className="bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+        <div className="bg-white rounded-lg overflow-hidden shadow-lg">
           <div className="grid md:grid-cols-2">
             <div className="p-8 md:p-12 flex flex-col justify-center">
               <h3 className="heading-md mb-4">{featuredCaseStudy?.title || 'Quoting Automation'}</h3>

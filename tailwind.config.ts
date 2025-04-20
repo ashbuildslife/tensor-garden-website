@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -88,6 +87,12 @@ export default {
 					800: '#241e37',
 					900: '#120f1b',
 				},
+				backgroundColor: {
+					'soft-purple': '#E5DEFF',
+					'soft-yellow': '#FEF7CD',
+					'soft-pink': '#FFDEE2',
+					'soft-green': '#F2FCE2'
+				}
 			},
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],

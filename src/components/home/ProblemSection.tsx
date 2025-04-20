@@ -10,7 +10,7 @@ const ProblemSection = () => {
   const problems = homePage?.content.problems || [];
 
   return (
-    <section className="bg-white py-20">
+    <section className="bg-soft-purple py-20">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Insurance Industry Challenges"
@@ -24,7 +24,7 @@ const ProblemSection = () => {
               key={index}
               title={problem.title}
               description={problem.description}
-              className="animate-fade-in"
+              className="animate-fade-in bg-white rounded-lg"
               style={{ animationDelay: `${index * 100}ms` }}
             />
           ))}

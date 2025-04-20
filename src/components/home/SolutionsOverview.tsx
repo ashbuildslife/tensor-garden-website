@@ -35,7 +35,7 @@ const solutionsData = [
 
 const SolutionsOverview = () => {
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-soft-yellow py-20">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Our AI Solutions"
@@ -45,7 +45,7 @@ const SolutionsOverview = () => {
         
         <div className="grid md:grid-cols-2 gap-8 mt-12">
           {solutionsData.map((solution, index) => (
-            <Card key={index} className="card-shadow hover:border-teal-300 transition-all animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+            <Card key={index} className="card-shadow hover:border-teal-300 transition-all animate-fade-in bg-white" style={{ animationDelay: `${index * 100}ms` }}>
               <CardHeader className="flex flex-row items-center gap-4">
                 <div className="rounded-full p-2 bg-teal-100 text-teal-600">
                   {solution.icon}
