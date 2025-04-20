@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -6,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { MobileNavLinks } from './MobileNavLinks';
 import { DesktopNavLinks } from './DesktopNavLinks';
 
-const logoUrl = '/lovable-uploads/e8a1821c-f610-4ece-a65f-d21aa16f0383.png';
+const logoUrl = '/lovable-uploads/e2e49140-6a09-416d-b76e-b679396bb899.png';
 
 const industries = [
   {
@@ -43,7 +42,15 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-2">
-            <img src={logoUrl} alt="Tensor Garden Logo" className="h-14 w-auto" />
+            <img 
+              src={logoUrl} 
+              alt="Tensor Garden Logo" 
+              className="h-14 w-auto" 
+              onError={(e) => {
+                console.error('Logo failed to load', e);
+                e.currentTarget.style.display = 'none';
+              }}
+            />
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
