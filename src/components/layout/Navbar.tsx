@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -33,6 +34,7 @@ const industries = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const [logoLoaded, setLogoLoaded] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,21 +45,24 @@ const Navbar = () => {
     setLogoError(true);
   };
 
+  const handleLogoLoad = () => {
+    console.log('Logo loaded successfully');
+    setLogoLoaded(true);
+  };
+
   return (
     <nav className="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-2">
-            {!logoError ? (
-              <img 
-                src={logoUrl} 
-                alt="Tensor Garden Logo" 
-                className="h-14 w-auto" 
-                onError={handleLogoError}
-              />
-            ) : (
-              <div className="text-xl font-bold text-gray-700">Tensor Garden</div>
-            )}
+            <img 
+              src={logoUrl} 
+              alt="Tensor Garden Logo" 
+              className="h-14 w-auto object-contain" 
+              onError={handleLogoError}
+              onLoad={handleLogoLoad}
+              style={{ maxWidth: '200px' }}
+            />
           </Link>
           
           <div className="hidden md:flex items-center space-x-8">
