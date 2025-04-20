@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -44,15 +43,14 @@ const Navbar = () => {
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [logoError, setLogoError] = useState(false);
   
-  // For debugging - log available images in public folder
+  // Try using a reliable placeholder image from Unsplash instead of the missing logo
+  const logoUrl = 'https://images.unsplash.com/photo-1518770660439-4636190af475';
+  
   useEffect(() => {
     console.log("Current logo path being used:", logoUrl);
     console.log("Logo loaded state:", logoLoaded);
     console.log("Logo error state:", logoError);
   }, [logoLoaded, logoError]);
-
-  // Instead of hardcoding a path that might not exist, use the SVG logo
-  const logoUrl = '/lovable-uploads/30382601-3781-4f5e-a103-d085f7a855ae.png'; 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
