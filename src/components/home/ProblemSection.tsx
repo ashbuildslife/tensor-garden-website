@@ -4,15 +4,33 @@ import { SectionHeading } from '@/components/ui/section-heading';
 import { FeatureCard } from '@/components/ui/feature-card';
 import { useCMS } from '@/contexts/CMSContext';
 import { cn } from '@/lib/utils';
+import { EditableContent } from '@/components/cms/EditableContent';
 
 interface ProblemSectionProps {
   className?: string;
 }
 
 const ProblemSection: React.FC<ProblemSectionProps> = ({ className }) => {
-  const { pages } = useCMS();
+  const { pages, updatePage, isLoading } = useCMS();
   const homePage = pages.find(page => page.slug === '/');
   const problems = homePage?.content.problems || [];
+
+  const handleUpdateProblem = (index: number, field: 'title' | 'description', value: string) => {
+    if (!homePage) return;
+    
+    const updatedProblems = [...problems];
+    updatedProblems[index] = {
+      ...updatedProblems[index],
+      [field]: value
+    };
+    
+    const updatedContent = {
+      ...homePage.content,
+      problems: updatedProblems
+    };
+    
+    updatePage(homePage.id, { content: updatedContent });
+  };
 
   return (
     <section className={cn("py-20", className)}>
@@ -24,15 +42,35 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ className }) => {
         />
         
         <div className="grid md:grid-cols-3 gap-8 mt-12">
-          {problems.map((problem: any, index: number) => (
-            <FeatureCard
-              key={index}
-              title={problem.title}
-              description={problem.description}
-              className="animate-fade-in bg-white rounded-lg"
-              style={{ animationDelay: `${index * 100}ms` }}
-            />
-          ))}
+          {isLoading ? (
+            <div className="col-span-3 text-center py-12">Loading problems...</div>
+          ) : (
+            problems.map((problem: any, index: number) => (
+              <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                <EditableContent
+                  id={`problem-title-${index}`}
+                  content={problem.title}
+                  onUpdate={(value) => handleUpdateProblem(index, 'title', value)}
+                  type="text"
+                >
+                  <FeatureCard
+                    title={problem.title}
+                    description={
+                      <EditableContent
+                        id={`problem-description-${index}`}
+                        content={problem.description}
+                        onUpdate={(value) => handleUpdateProblem(index, 'description', value)}
+                        type="text"
+                      >
+                        <span>{problem.description}</span>
+                      </EditableContent>
+                    }
+                    className="bg-white rounded-lg"
+                  />
+                </EditableContent>
+              </div>
+            ))
+          )}
         </div>
         
         <div className="mt-16 text-center">

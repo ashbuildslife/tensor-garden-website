@@ -1,5 +1,7 @@
 
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/components/ui/use-toast';
 
 // Define content types for our CMS
 export interface PageContent {
@@ -80,125 +82,187 @@ interface CMSContextType {
   testimonials: Testimonial[];
   services: Service[];
   products: Product[];
-  updatePage: (pageId: string, content: Partial<PageContent>) => void;
-  updateBlogPost: (postId: string, content: Partial<BlogPost>) => void;
-  updateCaseStudy: (studyId: string, content: Partial<CaseStudy>) => void;
-  updateTestimonial: (testimonialId: string, content: Partial<Testimonial>) => void;
-  updateService: (serviceId: string, content: Partial<Service>) => void;
-  updateProduct: (productId: string, content: Partial<Product>) => void;
-  addBlogPost: (post: BlogPost) => void;
-  addCaseStudy: (study: CaseStudy) => void;
-  addTestimonial: (testimonial: Testimonial) => void;
+  updatePage: (pageId: string, content: Partial<PageContent>) => Promise<void>;
+  updateBlogPost: (postId: string, content: Partial<BlogPost>) => Promise<void>;
+  updateCaseStudy: (studyId: string, content: Partial<CaseStudy>) => Promise<void>;
+  updateTestimonial: (testimonialId: string, content: Partial<Testimonial>) => Promise<void>;
+  updateService: (serviceId: string, content: Partial<Service>) => Promise<void>;
+  updateProduct: (productId: string, content: Partial<Product>) => Promise<void>;
+  addBlogPost: (post: BlogPost) => Promise<void>;
+  addCaseStudy: (study: CaseStudy) => Promise<void>;
+  addTestimonial: (testimonial: Testimonial) => Promise<void>;
   isEditMode: boolean;
   toggleEditMode: () => void;
+  isLoading: boolean;
 }
-
-// Initial dummy data
-const initialPages: PageContent[] = [
-  {
-    id: 'home',
-    title: 'Tensor Garden - Cultivating AI Solutions for Insurance',
-    description: 'Tensor Garden provides AI solutions for the insurance industry, specializing in automation, AI agents, and consulting services.',
-    content: {
-      hero: {
-        headline: 'Cultivating AI Solutions for Insurance',
-        subheadline: 'We help insurance agencies and MGAs grow with AI-powered automation',
-        ctaText: 'Schedule a Consultation',
-        ctaLink: '/contact',
-      },
-      problems: [
-        {
-          title: 'Manual Processes',
-          description: 'Insurance agencies waste countless hours on repetitive tasks that could be automated.'
-        },
-        {
-          title: 'Slow Response Times',
-          description: 'Traditional workflows lead to delayed quote turnaround and frustrated clients.'
-        },
-        {
-          title: 'Operational Inefficiency',
-          description: 'Outdated systems and processes create bottlenecks and revenue leakage.'
-        },
-      ],
-      featuredCaseStudy: {
-        title: 'Quoting Automation',
-        metrics: '15 min saved per quote × 400 monthly leads',
-        description: 'We helped a specialty MGA automate their quoting process, saving 100 hours monthly.',
-        linkText: 'View Case Study',
-        link: '/case-studies/quoting-automation',
-      },
-    },
-    slug: '/',
-    isPublished: true,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  }
-];
-
-// Placeholder data for other content types
-const initialBlogPosts: BlogPost[] = [];
-const initialCaseStudies: CaseStudy[] = [];
-const initialTestimonials: Testimonial[] = [];
-const initialServices: Service[] = [];
-const initialProducts: Product[] = [];
 
 // Create context
 const CMSContext = createContext<CMSContextType | undefined>(undefined);
 
 export const CMSProvider = ({ children }: { children: ReactNode }) => {
-  const [pages, setPages] = useState<PageContent[]>(initialPages);
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(initialBlogPosts);
-  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>(initialCaseStudies);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials);
-  const [services, setServices] = useState<Service[]>(initialServices);
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  const [pages, setPages] = useState<PageContent[]>([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const updatePage = (pageId: string, content: Partial<PageContent>) => {
-    setPages(pages.map(page => 
-      page.id === pageId ? { ...page, ...content, updatedAt: new Date().toISOString() } : page
-    ));
+  // Fetch content from Supabase on component mount
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        setIsLoading(true);
+        
+        // Fetch pages
+        const { data: pagesData, error: pagesError } = await supabase
+          .from('cms_content')
+          .select('*')
+          .eq('type', 'page');
+        
+        if (pagesError) throw pagesError;
+        
+        // Transform the data to match our frontend model
+        const transformedPages = pagesData.map(page => ({
+          id: page.id,
+          title: page.title,
+          description: page.meta_description || '',
+          content: page.content as Record<string, any>,
+          slug: page.slug,
+          isPublished: page.is_published,
+          createdAt: page.created_at,
+          updatedAt: page.updated_at
+        }));
+        
+        setPages(transformedPages);
+        
+        // Similar fetches for other content types would be here
+        // For now, we'll focus on pages since they're the most important
+        
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching CMS content:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load content. Please try again later.',
+          variant: 'destructive'
+        });
+        setIsLoading(false);
+      }
+    };
+    
+    fetchContent();
+  }, []);
+
+  const updatePage = async (pageId: string, content: Partial<PageContent>) => {
+    try {
+      // First update local state for immediate UI feedback
+      setPages(pages.map(page => 
+        page.id === pageId ? { ...page, ...content, updatedAt: new Date().toISOString() } : page
+      ));
+      
+      // Prepare data for Supabase
+      const supabaseData = {
+        ...(content.title && { title: content.title }),
+        ...(content.description && { meta_description: content.description }),
+        ...(content.content && { content: content.content }),
+        ...(content.slug && { slug: content.slug }),
+        ...(content.isPublished !== undefined && { is_published: content.isPublished }),
+        updated_at: new Date().toISOString()
+      };
+      
+      // Update in Supabase
+      const { error } = await supabase
+        .from('cms_content')
+        .update(supabaseData)
+        .eq('id', pageId);
+      
+      if (error) throw error;
+      
+      toast({
+        title: 'Success',
+        description: 'Page updated successfully!'
+      });
+    } catch (error) {
+      console.error('Error updating page:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update page. Please try again.',
+        variant: 'destructive'
+      });
+      
+      // Fetch the latest data to ensure UI state is correct
+      const { data } = await supabase
+        .from('cms_content')
+        .select('*')
+        .eq('id', pageId)
+        .single();
+      
+      if (data) {
+        setPages(pages.map(page => 
+          page.id === pageId ? {
+            ...page,
+            title: data.title,
+            description: data.meta_description || '',
+            content: data.content,
+            slug: data.slug,
+            isPublished: data.is_published,
+            updatedAt: data.updated_at
+          } : page
+        ));
+      }
+    }
   };
 
-  const updateBlogPost = (postId: string, content: Partial<BlogPost>) => {
+  // Remaining methods would follow a similar pattern
+  const updateBlogPost = async (postId: string, content: Partial<BlogPost>) => {
+    // Implementation would be similar to updatePage
     setBlogPosts(blogPosts.map(post => 
       post.id === postId ? { ...post, ...content, updatedAt: new Date().toISOString() } : post
     ));
   };
 
-  const updateCaseStudy = (studyId: string, content: Partial<CaseStudy>) => {
+  const updateCaseStudy = async (studyId: string, content: Partial<CaseStudy>) => {
+    // Implementation would be similar to updatePage
     setCaseStudies(caseStudies.map(study => 
       study.id === studyId ? { ...study, ...content, updatedAt: new Date().toISOString() } : study
     ));
   };
 
-  const updateTestimonial = (testimonialId: string, content: Partial<Testimonial>) => {
+  const updateTestimonial = async (testimonialId: string, content: Partial<Testimonial>) => {
+    // Implementation would be similar to updatePage
     setTestimonials(testimonials.map(testimonial => 
       testimonial.id === testimonialId ? { ...testimonial, ...content } : testimonial
     ));
   };
 
-  const updateService = (serviceId: string, content: Partial<Service>) => {
+  const updateService = async (serviceId: string, content: Partial<Service>) => {
+    // Implementation would be similar to updatePage
     setServices(services.map(service => 
       service.id === serviceId ? { ...service, ...content } : service
     ));
   };
 
-  const updateProduct = (productId: string, content: Partial<Product>) => {
+  const updateProduct = async (productId: string, content: Partial<Product>) => {
+    // Implementation would be similar to updatePage
     setProducts(products.map(product => 
       product.id === productId ? { ...product, ...content } : product
     ));
   };
 
-  const addBlogPost = (post: BlogPost) => {
+  const addBlogPost = async (post: BlogPost) => {
+    // Implementation would be similar to updatePage, but for creation
     setBlogPosts([...blogPosts, post]);
   };
 
-  const addCaseStudy = (study: CaseStudy) => {
+  const addCaseStudy = async (study: CaseStudy) => {
+    // Implementation would be similar to updatePage, but for creation
     setCaseStudies([...caseStudies, study]);
   };
 
-  const addTestimonial = (testimonial: Testimonial) => {
+  const addTestimonial = async (testimonial: Testimonial) => {
+    // Implementation would be similar to updatePage, but for creation
     setTestimonials([...testimonials, testimonial]);
   };
 
@@ -224,6 +288,7 @@ export const CMSProvider = ({ children }: { children: ReactNode }) => {
     addTestimonial,
     isEditMode,
     toggleEditMode,
+    isLoading
   };
 
   return <CMSContext.Provider value={value}>{children}</CMSContext.Provider>;

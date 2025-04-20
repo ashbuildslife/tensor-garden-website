@@ -3,11 +3,54 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useCMS } from '@/contexts/CMSContext';
+import { EditableContent } from '@/components/cms/EditableContent';
 
 const Hero = () => {
-  const { pages } = useCMS();
+  const { pages, updatePage, isLoading } = useCMS();
   const homePage = pages.find(page => page.slug === '/');
   const heroContent = homePage?.content.hero;
+
+  const handleUpdateHeadline = (newValue: string) => {
+    if (!homePage) return;
+    
+    const updatedContent = {
+      ...homePage.content,
+      hero: {
+        ...homePage.content.hero,
+        headline: newValue
+      }
+    };
+    
+    updatePage(homePage.id, { content: updatedContent });
+  };
+
+  const handleUpdateSubheadline = (newValue: string) => {
+    if (!homePage) return;
+    
+    const updatedContent = {
+      ...homePage.content,
+      hero: {
+        ...homePage.content.hero,
+        subheadline: newValue
+      }
+    };
+    
+    updatePage(homePage.id, { content: updatedContent });
+  };
+
+  const handleUpdateCtaText = (newValue: string) => {
+    if (!homePage) return;
+    
+    const updatedContent = {
+      ...homePage.content,
+      hero: {
+        ...homePage.content.hero,
+        ctaText: newValue
+      }
+    };
+    
+    updatePage(homePage.id, { content: updatedContent });
+  };
 
   return (
     <section className="relative bg-gradient-to-r from-gray-50 to-gray-100 overflow-hidden">
@@ -21,20 +64,41 @@ const Hero = () => {
             AI Solutions for Insurance
           </span>
           
-          <h1 className="heading-xl mb-6 animate-fade-in">
-            {heroContent?.headline || 'Cultivating AI Solutions for Insurance'}
-          </h1>
+          <EditableContent
+            id="hero-headline"
+            content={heroContent?.headline || 'Cultivating AI Solutions for Insurance'}
+            onUpdate={handleUpdateHeadline}
+            type="text"
+          >
+            <h1 className="heading-xl mb-6 animate-fade-in">
+              {isLoading ? 'Loading...' : (heroContent?.headline || 'Cultivating AI Solutions for Insurance')}
+            </h1>
+          </EditableContent>
           
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
-            {heroContent?.subheadline || 'We help insurance agencies and MGAs grow with AI-powered automation'}
-          </p>
+          <EditableContent
+            id="hero-subheadline"
+            content={heroContent?.subheadline || 'We help insurance agencies and MGAs grow with AI-powered automation'}
+            onUpdate={handleUpdateSubheadline}
+            type="text"
+          >
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
+              {isLoading ? 'Loading...' : (heroContent?.subheadline || 'We help insurance agencies and MGAs grow with AI-powered automation')}
+            </p>
+          </EditableContent>
           
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <Button asChild size="lg" className="cta-button">
-              <Link to={heroContent?.ctaLink || '/contact'}>
-                {heroContent?.ctaText || 'Schedule a Consultation'}
-              </Link>
-            </Button>
+            <EditableContent
+              id="hero-cta"
+              content={heroContent?.ctaText || 'Schedule a Consultation'}
+              onUpdate={handleUpdateCtaText}
+              type="text"
+            >
+              <Button asChild size="lg" className="cta-button">
+                <Link to={heroContent?.ctaLink || '/contact'}>
+                  {isLoading ? 'Loading...' : (heroContent?.ctaText || 'Schedule a Consultation')}
+                </Link>
+              </Button>
+            </EditableContent>
             
             <Button asChild size="lg" variant="outline" className="outlined-button">
               <Link to="/case-studies">
