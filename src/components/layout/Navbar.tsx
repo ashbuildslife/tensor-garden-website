@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { MobileNavLinks } from './MobileNavLinks';
 import { DesktopNavLinks } from './DesktopNavLinks';
 
-const logoUrl = '/lovable-uploads/be881746-c243-4981-bf8c-d533235c978f.png';
+const logoUrl = '/lovable-uploads/d559e619-e50b-4a6b-b188-b5a6b78a09ca.png';
 
 const industries = [
   {
