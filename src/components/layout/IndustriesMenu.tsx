@@ -3,10 +3,10 @@ import { Building2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
+  NavigationMenuContent,
 } from "@/components/ui/navigation-menu"
 
 const industries = [
@@ -37,7 +37,11 @@ export const IndustriesMenu = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-gray-700 dark:text-gray-100 hover:text-teal-500 dark:hover:text-teal-400 font-medium flex items-center gap-2 bg-transparent hover:bg-transparent">
+          <NavigationMenuTrigger 
+            className="text-gray-700 dark:text-gray-100 hover:text-teal-500 dark:hover:text-teal-400 font-medium flex items-center gap-2 bg-transparent hover:bg-transparent"
+            onPointerEnter={(e) => e.preventDefault()}
+            onPointerLeave={(e) => e.preventDefault()}
+          >
             <Building2 className="w-4 h-4" />
             Industries
           </NavigationMenuTrigger>
