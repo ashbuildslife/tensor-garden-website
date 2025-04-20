@@ -37,11 +37,9 @@ export const IndustriesMenu = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-gray-700 hover:text-teal-500 font-medium">
-            <span className="flex items-center gap-2">
-              <Building2 className="w-4 h-4" />
-              Industries
-            </span>
+          <NavigationMenuTrigger className="text-gray-700 hover:text-teal-500 font-medium flex items-center gap-2">
+            <Building2 className="w-4 h-4" />
+            Industries
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="grid gap-3 p-6 w-[400px] lg:w-[500px] lg:grid-cols-2">
