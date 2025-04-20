@@ -5,10 +5,10 @@ import { cn } from '@/lib/utils';
 
 interface FeatureCardProps {
   title: string;
-  description: string;
+  description: string | React.ReactNode;  // Update to accept both string and React.ReactNode
   icon?: React.ReactNode;
   className?: string;
-  style?: React.CSSProperties; // Added the style prop
+  style?: React.CSSProperties;
 }
 
 export function FeatureCard({ title, description, icon, className, style }: FeatureCardProps) {
@@ -19,7 +19,9 @@ export function FeatureCard({ title, description, icon, className, style }: Feat
         <CardTitle className="text-xl font-semibold">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-base">{description}</CardDescription>
+        <CardDescription className="text-base">
+          {description}
+        </CardDescription>
       </CardContent>
     </Card>
   );
