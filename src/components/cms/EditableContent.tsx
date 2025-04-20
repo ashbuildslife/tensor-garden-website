@@ -8,6 +8,7 @@ interface EditableContentProps {
   content: any;
   onUpdate: (newContent: any) => void;
   type?: 'text' | 'richtext' | 'image' | 'button';
+  children: React.ReactNode; // Added the children prop
 }
 
 export const EditableContent: React.FC<EditableContentProps> = ({

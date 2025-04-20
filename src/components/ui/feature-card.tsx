@@ -8,11 +8,12 @@ interface FeatureCardProps {
   description: string;
   icon?: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties; // Added the style prop
 }
 
-export function FeatureCard({ title, description, icon, className }: FeatureCardProps) {
+export function FeatureCard({ title, description, icon, className, style }: FeatureCardProps) {
   return (
-    <Card className={cn("card-shadow h-full transition-all hover:border-teal-300", className)}>
+    <Card className={cn("card-shadow h-full transition-all hover:border-teal-300", className)} style={style}>
       <CardHeader>
         {icon && <div className="mb-4 text-teal-500">{icon}</div>}
         <CardTitle className="text-xl font-semibold">{title}</CardTitle>
