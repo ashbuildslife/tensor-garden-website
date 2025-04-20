@@ -65,25 +65,25 @@ const services = [
 const ServicePage = () => {
   return (
     <>
-      <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-20">
+      <section className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-20">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm text-teal-600 font-medium uppercase tracking-widest mb-4 block">
+            <span className="text-sm text-teal-600 dark:text-teal-400 font-medium uppercase tracking-widest mb-4 block">
               Our Services
             </span>
             
-            <h1 className="heading-xl mb-6">
+            <h1 className="heading-xl mb-6 dark:text-white">
               AI Solutions Tailored for Insurance
             </h1>
             
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               From strategic consulting to implementation, we provide comprehensive AI services designed specifically for insurance agencies and MGAs.
             </p>
           </div>
         </div>
       </section>
       
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Our Service Offerings"
@@ -91,29 +91,29 @@ const ServicePage = () => {
           />
           
           <div className="grid md:grid-cols-2 gap-8 mt-12">
-            {services.map((service, index) => (
-              <Card key={service.id} className="card-shadow hover:border-teal-300 transition-all">
+            {services.map((service) => (
+              <Card key={service.id} className="card-shadow hover:border-teal-300 transition-all dark:border-gray-800">
                 <CardHeader className="flex flex-row items-center gap-4">
-                  <div className="rounded-full p-2 bg-teal-100 text-teal-600">
+                  <div className="rounded-full p-2 bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300">
                     {service.icon}
                   </div>
                   <div>
-                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                    <CardTitle className="text-xl dark:text-white">{service.title}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base mb-4">{service.description}</CardDescription>
+                  <CardDescription className="text-base mb-4 dark:text-gray-300">{service.description}</CardDescription>
                   <ul className="space-y-2">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2">
-                        <div className="h-1.5 w-1.5 rounded-full bg-teal-500"></div>
-                        <span className="text-gray-700">{feature}</span>
+                        <div className="h-1.5 w-1.5 rounded-full bg-teal-500 dark:bg-teal-400"></div>
+                        <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button asChild variant="outline" className="outlined-button">
+                  <Button asChild variant="outline" className="outlined-button dark:border-teal-400 dark:text-teal-400 dark:hover:bg-teal-900/20">
                     <Link to={`/services/${service.id}`} className="flex items-center gap-2">
                       Learn more <ArrowRight className="h-4 w-4" />
                     </Link>

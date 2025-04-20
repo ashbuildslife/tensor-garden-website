@@ -67,25 +67,25 @@ const BlogPage = () => {
   
   return (
     <>
-      <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-20">
+      <section className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-20">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm text-teal-600 font-medium uppercase tracking-widest mb-4 block">
+            <span className="text-sm text-teal-600 dark:text-teal-400 font-medium uppercase tracking-widest mb-4 block">
               Our Blog
             </span>
             
-            <h1 className="heading-xl mb-6">
+            <h1 className="heading-xl mb-6 dark:text-white">
               Insights on AI in Insurance
             </h1>
             
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Explore our latest articles on AI, automation, and industry trends in the insurance space.
             </p>
           </div>
         </div>
       </section>
       
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-3 mb-12">
             {categories.map(category => (
@@ -93,8 +93,8 @@ const BlogPage = () => {
                 key={category}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   activeCategory === category
-                    ? 'bg-teal-100 text-teal-800'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-100'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
                 onClick={() => setActiveCategory(category)}
               >
@@ -104,27 +104,27 @@ const BlogPage = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
-              <Card key={post.id} className="card-shadow overflow-hidden flex flex-col h-full">
-                <div className="aspect-[16/9] bg-gray-100"></div>
+            {filteredPosts.map((post) => (
+              <Card key={post.id} className="card-shadow overflow-hidden flex flex-col h-full dark:border-gray-800">
+                <div className="aspect-[16/9] bg-gray-100 dark:bg-gray-800"></div>
                 <CardHeader>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs font-medium px-3 py-1 bg-teal-100 text-teal-800 rounded-full">
+                    <span className="text-xs font-medium px-3 py-1 bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-100 rounded-full">
                       {post.category}
                     </span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
                       {post.date} · {post.readTime}
                     </span>
                   </div>
-                  <CardTitle className="text-xl">{post.title}</CardTitle>
+                  <CardTitle className="text-xl dark:text-white">{post.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base dark:text-gray-300">
                     {post.excerpt}
                   </CardDescription>
                 </CardContent>
                 <CardFooter className="mt-auto">
-                  <Button asChild variant="ghost" className="text-teal-600 hover:text-teal-700 hover:bg-teal-50 p-0 flex items-center gap-2">
+                  <Button asChild variant="ghost" className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-900/20 p-0 flex items-center gap-2">
                     <Link to={`/blog/${post.id}`}>
                       Read Article <ArrowRight className="h-4 w-4" />
                     </Link>

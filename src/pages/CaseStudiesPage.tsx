@@ -52,25 +52,25 @@ const caseStudies = [
 const CaseStudiesPage = () => {
   return (
     <>
-      <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-20">
+      <section className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-20">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="text-sm text-teal-600 font-medium uppercase tracking-widest mb-4 block">
+            <span className="text-sm text-teal-600 dark:text-teal-400 font-medium uppercase tracking-widest mb-4 block">
               Client Success
             </span>
             
-            <h1 className="heading-xl mb-6">
+            <h1 className="heading-xl mb-6 dark:text-white">
               Case Studies
             </h1>
             
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Real results from insurance agencies and MGAs that have partnered with Tensor Garden.
             </p>
           </div>
         </div>
       </section>
       
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Our Success Stories"
@@ -78,34 +78,34 @@ const CaseStudiesPage = () => {
           />
           
           <div className="space-y-16 mt-12">
-            {caseStudies.map((study, index) => (
-              <div key={study.id} className="bg-gray-50 rounded-lg overflow-hidden shadow-lg">
+            {caseStudies.map((study) => (
+              <div key={study.id} className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
                 <div className="grid md:grid-cols-2">
                   <div className="p-8 md:p-12 flex flex-col justify-center">
-                    <span className="text-sm text-teal-600 font-medium uppercase tracking-widest mb-2 block">
+                    <span className="text-sm text-teal-600 dark:text-teal-400 font-medium uppercase tracking-widest mb-2 block">
                       {study.client}
                     </span>
                     
-                    <h3 className="heading-md mb-4">{study.title}</h3>
+                    <h3 className="heading-md mb-4 dark:text-white">{study.title}</h3>
                     
                     <div className="space-y-4 mb-6">
                       <div>
-                        <h4 className="font-semibold text-gray-800">Challenge:</h4>
-                        <p className="text-gray-600">{study.challenge}</p>
+                        <h4 className="font-semibold text-gray-800 dark:text-gray-200">Challenge:</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{study.challenge}</p>
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-gray-800">Solution:</h4>
-                        <p className="text-gray-600">{study.solution}</p>
+                        <h4 className="font-semibold text-gray-800 dark:text-gray-200">Solution:</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{study.solution}</p>
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-gray-800">Results:</h4>
-                        <p className="text-gray-600">{study.results}</p>
+                        <h4 className="font-semibold text-gray-800 dark:text-gray-200">Results:</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{study.results}</p>
                       </div>
                     </div>
                     
-                    <Button asChild variant="outline" className="outlined-button w-fit mt-4">
+                    <Button asChild variant="outline" className="outlined-button w-fit mt-4 dark:border-teal-400 dark:text-teal-400 dark:hover:bg-teal-900/20">
                       <Link to={`/case-studies/${study.id}`} className="flex items-center gap-2">
                         View Full Case Study <ArrowRight className="h-4 w-4" />
                       </Link>
