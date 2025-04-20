@@ -76,9 +76,6 @@ const Footer = () => {
             <address className="not-italic text-gray-400 space-y-2">
               <p>Tensor Garden LLC</p>
               <p>Wyoming, USA</p>
-              <a href="mailto:info@tensorgarden.com" className="hover:text-teal-400 transition-colors block">
-                info@tensorgarden.com
-              </a>
             </address>
             
             <div className="mt-6">
