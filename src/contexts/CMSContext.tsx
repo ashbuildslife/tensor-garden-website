@@ -2,13 +2,14 @@
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/components/ui/use-toast';
+import { Json } from '@/integrations/supabase/types';
 
 // Define content types for our CMS
 export interface PageContent {
   id: string;
   title: string;
   description: string;
-  content: Record<string, any>;
+  content: Record<string, any>;  // This needs to match the JSON structure from the database
   slug: string;
   isPublished: boolean;
   createdAt: string;
@@ -124,13 +125,13 @@ export const CMSProvider = ({ children }: { children: ReactNode }) => {
         if (pagesError) throw pagesError;
         
         // Transform the data to match our frontend model
-        const transformedPages = pagesData.map(page => ({
+        const transformedPages: PageContent[] = pagesData.map(page => ({
           id: page.id,
           title: page.title,
           description: page.meta_description || '',
           content: page.content as Record<string, any>,
           slug: page.slug,
-          isPublished: page.is_published,
+          isPublished: page.is_published || false,
           createdAt: page.created_at,
           updatedAt: page.updated_at
         }));
@@ -205,9 +206,9 @@ export const CMSProvider = ({ children }: { children: ReactNode }) => {
             ...page,
             title: data.title,
             description: data.meta_description || '',
-            content: data.content,
+            content: data.content as Record<string, any>,
             slug: data.slug,
-            isPublished: data.is_published,
+            isPublished: data.is_published || false,
             updatedAt: data.updated_at
           } : page
         ));

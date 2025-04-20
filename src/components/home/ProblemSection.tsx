@@ -62,7 +62,7 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ className }) => {
                         onUpdate={(value) => handleUpdateProblem(index, 'description', value)}
                         type="text"
                       >
-                        <span>{problem.description}</span>
+                        {problem.description}
                       </EditableContent>
                     }
                     className="bg-white rounded-lg"
