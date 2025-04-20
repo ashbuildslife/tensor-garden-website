@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -32,8 +32,19 @@ const industries = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // Updated path to the correct uploaded logo
-  const logoUrl = '/lovable-uploads/479b6a1e-b257-4d82-bc23-752f40dbd910.png';
+  // Use the newly uploaded logo
+  const logoUrl = '/lovable-uploads/b2cbf92d-38e6-4161-8c3e-eaf5d2c4466e.png';
+  
+  // Log the image path to check if it's correct
+  console.log('Using logo path:', logoUrl);
+  
+  useEffect(() => {
+    // This will help check if the image exists
+    const img = new Image();
+    img.onload = () => console.log('Logo loaded successfully');
+    img.onerror = () => console.error('Error loading logo from path:', logoUrl);
+    img.src = logoUrl;
+  }, [logoUrl]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -49,6 +60,10 @@ const Navbar = () => {
               alt="Tensor Garden Logo" 
               className="h-12 w-auto" 
               style={{ maxWidth: '180px' }}
+              onError={(e) => {
+                console.error('Image failed to load in component');
+                console.log('Image URL that failed:', e.currentTarget.src);
+              }}
             />
           </Link>
           
