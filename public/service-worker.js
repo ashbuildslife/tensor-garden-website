@@ -1,6 +1,6 @@
 
-// Cache name
-const CACHE_NAME = 'tensor-garden-v1';
+// Cache name with a version to easily clear cache
+const CACHE_NAME = 'tensor-garden-v2';
 
 // Files to cache
 const urlsToCache = [
@@ -36,7 +36,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// Update a service worker
+// Update a service worker - more aggressive cache clearing
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -48,6 +48,10 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    }).then(() => {
+      // Force reload of all controlled pages
+      return self.clients.claim();
     })
   );
 });
+
