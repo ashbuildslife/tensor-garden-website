@@ -3,14 +3,19 @@ import React from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { FeatureCard } from '@/components/ui/feature-card';
 import { useCMS } from '@/contexts/CMSContext';
+import { cn } from '@/lib/utils';
 
-const ProblemSection = () => {
+interface ProblemSectionProps {
+  className?: string;
+}
+
+const ProblemSection: React.FC<ProblemSectionProps> = ({ className }) => {
   const { pages } = useCMS();
   const homePage = pages.find(page => page.slug === '/');
   const problems = homePage?.content.problems || [];
 
   return (
-    <section className="bg-soft-purple py-20">
+    <section className={cn("py-20", className)}>
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Insurance Industry Challenges"

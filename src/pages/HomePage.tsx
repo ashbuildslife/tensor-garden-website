@@ -11,10 +11,10 @@ const HomePage = () => {
   return (
     <>
       <Hero />
-      <ProblemSection />
-      <SolutionsOverview />
-      <FeaturedCaseStudy />
-      <Testimonials />
+      <ProblemSection className="bg-soft-purple" />
+      <SolutionsOverview className="bg-soft-yellow" />
+      <FeaturedCaseStudy className="bg-soft-pink" />
+      <Testimonials className="bg-soft-green" />
       <ContactCta />
     </>
   );

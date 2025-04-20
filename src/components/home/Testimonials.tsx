@@ -2,6 +2,7 @@
 import React from 'react';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { Card, CardContent } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
 
 const testimonials = [
   {
@@ -24,9 +25,13 @@ const testimonials = [
   }
 ];
 
-const Testimonials = () => {
+interface TestimonialsProps {
+  className?: string;
+}
+
+const Testimonials: React.FC<TestimonialsProps> = ({ className }) => {
   return (
-    <section className="bg-soft-green py-20">
+    <section className={cn("py-20", className)}>
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Client Testimonials"

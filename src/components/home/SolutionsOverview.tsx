@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Book, FileSearch, Lightbulb, Users } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const solutionsData = [
   {
@@ -33,9 +34,13 @@ const solutionsData = [
   }
 ];
 
-const SolutionsOverview = () => {
+interface SolutionsOverviewProps {
+  className?: string;
+}
+
+const SolutionsOverview: React.FC<SolutionsOverviewProps> = ({ className }) => {
   return (
-    <section className="bg-soft-yellow py-20">
+    <section className={cn("py-20", className)}>
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Our AI Solutions"

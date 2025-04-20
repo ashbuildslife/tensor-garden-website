@@ -5,14 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useCMS } from '@/contexts/CMSContext';
 import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-const FeaturedCaseStudy = () => {
+interface FeaturedCaseStudyProps {
+  className?: string;
+}
+
+const FeaturedCaseStudy: React.FC<FeaturedCaseStudyProps> = ({ className }) => {
   const { pages } = useCMS();
   const homePage = pages.find(page => page.slug === '/');
   const featuredCaseStudy = homePage?.content.featuredCaseStudy;
 
   return (
-    <section className="bg-soft-pink py-20">
+    <section className={cn("py-20", className)}>
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           title="Client Success"
