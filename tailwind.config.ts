@@ -87,12 +87,10 @@ export default {
 					800: '#241e37',
 					900: '#120f1b',
 				},
-				backgroundColor: {
-					'soft-purple': '#8B5CF6',
-					'soft-yellow': '#FFC82C',
-					'soft-pink': '#EC4899',
-					'soft-green': '#10B981'
-				}
+				'soft-purple': '#8B5CF6',
+				'soft-yellow': '#FFC82C',
+				'soft-pink': '#EC4899',
+				'soft-green': '#10B981'
 			},
 			fontFamily: {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
