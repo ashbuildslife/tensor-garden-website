@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,36 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Tensor Garden Colors
+				teal: {
+					50: '#e6f7f7',
+					100: '#ccefef',
+					200: '#99dfdf',
+					300: '#66cfcf',
+					400: '#33bfbf',
+					500: '#0D6E6E',
+					600: '#0a5858',
+					700: '#084242',
+					800: '#052c2c',
+					900: '#031616',
+				},
+				purple: {
+					50: '#f5f3f9',
+					100: '#ebe7f3',
+					200: '#d7cfe7',
+					300: '#c3b7db',
+					400: '#af9fcf',
+					500: '#5B4B8A',
+					600: '#493c6e',
+					700: '#372d52',
+					800: '#241e37',
+					900: '#120f1b',
+				},
+			},
+			fontFamily: {
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				serif: ['Playfair Display', 'Georgia', 'serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +114,33 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-out': {
+					'0%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					},
+					'100%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'fade-out': 'fade-out 0.5s ease-out'
 			}
 		}
 	},
