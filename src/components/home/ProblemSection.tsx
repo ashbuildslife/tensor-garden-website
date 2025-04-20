@@ -65,7 +65,7 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ className }) => {
                         {problem.description}
                       </EditableContent>
                     }
-                    className="bg-white rounded-lg"
+                    className="bg-white dark:bg-gray-800 rounded-lg"
                   />
                 </EditableContent>
               </div>
@@ -74,7 +74,7 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ className }) => {
         </div>
         
         <div className="mt-16 text-center">
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 dark:text-gray-200 max-w-3xl mx-auto">
             Tensor Garden's AI solutions are specifically designed to address these challenges, helping insurance agencies and MGAs optimize operations and drive growth.
           </p>
         </div>

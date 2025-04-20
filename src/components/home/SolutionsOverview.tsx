@@ -50,20 +50,20 @@ const SolutionsOverview: React.FC<SolutionsOverviewProps> = ({ className }) => {
         
         <div className="grid md:grid-cols-2 gap-8 mt-12">
           {solutionsData.map((solution, index) => (
-            <Card key={index} className="card-shadow hover:border-teal-300 transition-all animate-fade-in bg-white" style={{ animationDelay: `${index * 100}ms` }}>
+            <Card key={index} className="card-shadow hover:border-teal-300 transition-all animate-fade-in bg-white dark:bg-gray-800" style={{ animationDelay: `${index * 100}ms` }}>
               <CardHeader className="flex flex-row items-center gap-4">
-                <div className="rounded-full p-2 bg-teal-100 text-teal-600">
+                <div className="rounded-full p-2 bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-400">
                   {solution.icon}
                 </div>
                 <div>
-                  <CardTitle className="text-xl">{solution.title}</CardTitle>
+                  <CardTitle className="text-xl text-gray-900 dark:text-white">{solution.title}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">{solution.description}</CardDescription>
+                <CardDescription className="text-base text-gray-700 dark:text-gray-200">{solution.description}</CardDescription>
               </CardContent>
               <CardFooter>
-                <Button asChild variant="ghost" className="text-teal-600 hover:text-teal-700 hover:bg-teal-50 p-0 flex items-center gap-2">
+                <Button asChild variant="ghost" className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-900/40 p-0 flex items-center gap-2">
                   <Link to={solution.link}>
                     Learn more <ArrowRight className="h-4 w-4" />
                   </Link>

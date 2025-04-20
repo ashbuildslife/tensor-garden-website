@@ -16,10 +16,10 @@ export function FeatureCard({ title, description, icon, className, style }: Feat
     <Card className={cn("card-shadow h-full transition-all hover:border-teal-300", className)} style={style}>
       <CardHeader>
         {icon && <div className="mb-4 text-teal-500">{icon}</div>}
-        <CardTitle className="text-xl font-semibold">{title}</CardTitle>
+        <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-700 dark:text-gray-200">
           {description}
         </CardDescription>
       </CardContent>

@@ -21,9 +21,9 @@ export function SectionHeading({
       centered && 'text-center',
       className
     )}>
-      <h2 className="heading-lg gradient-text inline-block">{title}</h2>
+      <h2 className="heading-lg gradient-text inline-block dark:text-white">{title}</h2>
       {subtitle && (
-        <p className="mt-4 text-lg text-gray-600 max-w-3xl">
+        <p className="mt-4 text-lg text-gray-700 dark:text-gray-200 max-w-3xl">
           {subtitle}
         </p>
       )}

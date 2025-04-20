@@ -99,7 +99,7 @@ export const SustainabilitySection: React.FC<SustainabilitySectionProps> = ({ cl
             onUpdate={(value) => handleUpdateContent('description', value)}
             type="text"
           >
-            <p className="text-lg text-gray-700 dark:text-gray-300">{sustainabilityData.description}</p>
+            <p className="text-lg text-gray-700 dark:text-gray-200">{sustainabilityData.description}</p>
           </EditableContent>
         </div>
         
@@ -141,7 +141,7 @@ export const SustainabilitySection: React.FC<SustainabilitySectionProps> = ({ cl
                   onUpdate={(value) => handleUpdateMetric(index, 'description', value)}
                   type="text"
                 >
-                  <p className="text-gray-600 dark:text-gray-300">{metric.description}</p>
+                  <p className="text-gray-700 dark:text-gray-300">{metric.description}</p>
                 </EditableContent>
               </CardContent>
             </Card>

@@ -53,14 +53,14 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-gray-50 to-gray-100 overflow-hidden">
+    <section className="relative bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-10">
         <div className="absolute inset-0 bg-[radial-gradient(#0D6E6E_1px,transparent_1px)] [background-size:20px_20px]"></div>
       </div>
       
       <div className="container max-w-7xl relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
         <div className="max-w-3xl">
-          <span className="text-sm text-teal-600 font-medium uppercase tracking-widest mb-4 block">
+          <span className="text-sm text-teal-600 dark:text-teal-400 font-medium uppercase tracking-widest mb-4 block">
             AI Solutions for Insurance
           </span>
           
@@ -70,7 +70,7 @@ const Hero = () => {
             onUpdate={handleUpdateHeadline}
             type="text"
           >
-            <h1 className="heading-xl mb-6 animate-fade-in">
+            <h1 className="heading-xl mb-6 animate-fade-in text-gray-900 dark:text-white">
               {isLoading ? 'Loading...' : (heroContent?.headline || 'Cultivating AI Solutions for Insurance')}
             </h1>
           </EditableContent>
@@ -81,7 +81,7 @@ const Hero = () => {
             onUpdate={handleUpdateSubheadline}
             type="text"
           >
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
+            <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 mb-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
               {isLoading ? 'Loading...' : (heroContent?.subheadline || 'We help insurance agencies and MGAs grow with AI-powered automation')}
             </p>
           </EditableContent>
@@ -109,7 +109,7 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-0 w-full h-16 bg-gradient-to-t from-white to-transparent"></div>
+      <div className="absolute bottom-0 w-full h-16 bg-gradient-to-t from-white dark:from-gray-900 to-transparent"></div>
     </section>
   );
 };

@@ -38,6 +38,7 @@ const Navbar = () => {
               variant="ghost" 
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              className="text-gray-700 dark:text-gray-200"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
