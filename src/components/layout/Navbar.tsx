@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Industry } from 'lucide-react';
+import { Menu, X, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-gray-700 hover:text-teal-500 font-medium">
                     <span className="flex items-center gap-2">
-                      <Industry className="w-4 h-4" />
+                      <Building2 className="w-4 h-4" />
                       Industries
                     </span>
                   </NavigationMenuTrigger>
